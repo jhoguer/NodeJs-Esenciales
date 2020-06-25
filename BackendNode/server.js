@@ -20,14 +20,14 @@ router.get('/message', function(req, res) {
   res.send('Lista de Mensajes');
 });
 
-router.post('/message', function(req, res) {
-  res.send('Mensaje añadido');
-})
+// router.post('/message', function(req, res) {
+//   res.send('Mensaje añadido');
+// })
 
-router.delete('/message', (req, res) => {
+router.post('/message', (req, res) => {
   console.log('El body: ', req.body);
   console.log('El query: ', req.query);
-  res.send('Mensahje añadido correctamente');
+  res.status(201).send([{ error: '', body: 'Creado correctamente'}]);
 })
 // app.use('/', function(req, res) {
   //   res.send('hola');
