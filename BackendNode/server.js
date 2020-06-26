@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 
+const response = require('./network/response');
+
 
 const app = express();
 
@@ -17,7 +19,8 @@ router.get('/message', function(req, res) {
   })
   console.log(req.headers);
 
-  res.send('Lista de Mensajes');
+  // res.send('Lista de Mensajes');
+  response.success(req, res, 'Lista de mensajes')
 });
 
 // router.post('/message', function(req, res) {
@@ -27,7 +30,13 @@ router.get('/message', function(req, res) {
 router.post('/message', (req, res) => {
   console.log('El body: ', req.body);
   console.log('El query: ', req.query);
-  res.status(201).send([{ error: '', body: 'Creado correctamente'}]);
+
+  if(req.query.error == "ok") {
+    response.error(req, res, 'Error simulado');
+  } else {
+    response.success(req, res, 'Creado correctamente', 201);
+  }
+  // res.status(201).send([{ error: '', body: 'Creado correctamente'}]);
 })
 // app.use('/', function(req, res) {
   //   res.send('hola');
