@@ -7,12 +7,13 @@ const response = require('../../network/response');
 const router = express.Router();
 
 router.get('/', function(req, res) {
-  res.header({
-    'customm': 'Un valor personalizazo'
-  })
-  console.log(req.headers);
-
-  response.success(req, res, 'Lista de mensajes')
+  controller.getMesseges()
+    .then(messageList => {
+      response.success(req, res, messageList, 200);
+    })
+    .catch(e => {
+      response.error(req, res, 'Unexpected error', 500, e);
+    })
 });
 
 
