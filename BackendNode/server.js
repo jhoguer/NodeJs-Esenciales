@@ -1,9 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const db = require('./db');
+
 
 // const router = require('./components/message/network');
 const router = require('./network/routes');
+
+db('mongodb+srv://userTelegram:telegram1234@cluster0-efbgv.mongodb.net/telegram?retryWrites=true&w=majority')
 
 
 const app = express();
