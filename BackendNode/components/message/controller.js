@@ -26,7 +26,24 @@ function getMesseges() {
   })
 }
 
+const updateMessage = (id, message) => {
+  return new Promise((resolve, reject) => {
+    if(!id || !message) {
+      reject('Invalid data');
+    }
+
+    store.updateText(id, message)
+      .then(resultado => {
+        resolve(resultado);
+      })
+      .catch(e => {
+        console.error('el error==>', e)
+      })
+  })
+}
+
 module.exports = {
   addMessage,
   getMesseges,
+  updateMessage,
 }
