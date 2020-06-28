@@ -16,8 +16,12 @@ function addMessage(message) {
 
 }
 
-async function getMessages() {
-  const messages = await Model.find();
+async function getMessages(userFilter) {
+  let filter = {};
+  if(userFilter) filter = { user: userFilter }
+  console.log(filter)
+
+  const messages = await Model.find(filter);
   return messages;
 }
 

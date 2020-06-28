@@ -19,10 +19,9 @@ function addMessage(user, message) {
   })
 }
 
-function getMesseges() {
-  console.log('Si usa el Controller')
+function getMesseges(userFilter) {
   return new Promise((resolve, reject) => {
-    resolve(store.list());
+    resolve(store.list(userFilter));
   })
 }
 
