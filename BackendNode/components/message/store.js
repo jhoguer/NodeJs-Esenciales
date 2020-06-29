@@ -10,13 +10,22 @@ function addMessage(message) {
 
 }
 
-async function getMessages(userFilter) {
-  let filter = {};
-  if(userFilter) filter = { user: userFilter }
-  console.log(filter)
+function getMessages(userFilter) {
+  return new Promise((resolve, reject) => {
+    let filter = {};
+    if(userFilter) filter = { user: userFilter }
+  
+    Model.find(filter)
+      .populate('user')
+      .exec((error, populated) => {
+        if(error) {
+          reject(error);
+          return false;
+        }
 
-  const messages = await Model.find(filter);
-  return messages;
+        resolve(populated);
+      })
+  })
 }
 
 async function updateText(id, message) {
